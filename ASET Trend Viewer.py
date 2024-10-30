@@ -1,10 +1,3 @@
-"""
-Author: KURT
-Date: 10-30-2024
-Description: This script provides a GUI to process multiple CSV files in a directory,
-             extract wafer data, and combine the data into a single output CSV file.
-"""
-
 import os
 import tkinter as tk
 from tkinter import filedialog, messagebox
@@ -20,6 +13,9 @@ def read_csv_files(directory):
         list: A list of lists containing the extracted data.
     """
     all_data = []
+    header = ['collection time', 'Wafer ID', 'Lot ID', 'Slot', 'Recipe', 'Data Type', 'Site #', 'thickness', 'gof', 'X', 'Y']
+    num_columns = len(header)
+
     for filename in os.listdir(directory):
         if filename.endswith('.csv'):
             file_path = os.path.normpath(os.path.join(directory, filename))
@@ -30,6 +26,7 @@ def read_csv_files(directory):
                 with open(file_path, 'r', encoding='latin1') as file:
                     lines = file.readlines()
 
+            collection_date_time = None
             wafer_id = None
             lot_id = None
             slot = None
@@ -37,7 +34,9 @@ def read_csv_files(directory):
             data_type = None
             site_data = []
             for line in lines:
-                if line.startswith('WAFER ID'):
+                if line.startswith('COLLECTION DATE/TIME'):
+                    collection_date_time = line.split(':', 1)[1].strip()
+                elif line.startswith('WAFER ID'):
                     if wafer_id and site_data:
                         wafer_id_clean = ''.join(filter(str.isalnum, wafer_id))
                         lot_id_clean = ''.join(filter(str.isalnum, lot_id))
@@ -45,10 +44,12 @@ def read_csv_files(directory):
                         recipe_clean = ''.join(filter(str.isalnum, recipe))
                         data_type_clean = ''.join(filter(str.isalnum, data_type))
                         for site in site_data:
-                            all_data.append([
-                                wafer_id_clean, lot_id_clean, slot_clean, recipe_clean, data_type_clean,
+                            row = [
+                                collection_date_time, wafer_id_clean, lot_id_clean, slot_clean, recipe_clean, data_type_clean,
                                 site['Site #'], site['Value1'], site['Value2'], site['X'], site['Y']
-                            ])
+                            ]
+                            if len(row) == num_columns:
+                                all_data.append(row)
                         site_data = []
 
                     wafer_id = line.split(',', 1)[1].strip().strip('"')
@@ -81,10 +82,12 @@ def read_csv_files(directory):
                 recipe_clean = ''.join(filter(str.isalnum, recipe))
                 data_type_clean = ''.join(filter(str.isalnum, data_type))
                 for site in site_data:
-                    all_data.append([
-                        wafer_id_clean, lot_id_clean, slot_clean, recipe_clean, data_type_clean,
+                    row = [
+                        collection_date_time, wafer_id_clean, lot_id_clean, slot_clean, recipe_clean, data_type_clean,
                         site['Site #'], site['Value1'], site['Value2'], site['X'], site['Y']
-                    ])
+                    ]
+                    if len(row) == num_columns:
+                        all_data.append(row)
 
     return all_data
 
@@ -100,7 +103,7 @@ def process_files():
     data = read_csv_files(directory)
     output_file_path = os.path.join(directory, 'output.csv')
     with open(output_file_path, 'w', encoding='utf-8') as output_file:
-        output_file.write('Wafer ID,Lot ID,Slot,Recipe,Data Type,Site #,thickness,gof,X,Y\n')
+        output_file.write('blank,collection time,Wafer ID,Lot ID,Slot,Recipe,Data Type,Site #,thickness,gof,X,Y\n')
         for row in data:
             output_file.write(','.join(row) + '\n')
 
@@ -116,4 +119,3 @@ process_button.pack(padx=20, pady=20)
 
 # Run the application
 root.mainloop()
-

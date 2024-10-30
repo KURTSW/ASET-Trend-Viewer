@@ -5,24 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1d23ad85-af87-419b-a56e-df8c71c029a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/ASET Trend Viewer.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ASET Trend Viewer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/CMPDDM1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/CMPDDV2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/DD2CAPE.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/DDMILD1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/FILOX.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/singletest/CMPDDM1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/singletest/CMPDDV2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/singletest/DD2CAPE.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/singletest/DDMILD1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/example aset datasets/singletest/FILOX.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/output.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ASET Trend Viewer.py" beforeDir="false" afterPath="$PROJECT_DIR$/ASET Trend Viewer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,6 +15,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 8
@@ -50,7 +37,7 @@
     &quot;Python.ASET Trend Viewer.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/kurtis.loken/PycharmProjects/ASET Trend Viewer&quot;
   }
 }</component>
@@ -126,9 +113,20 @@
       <option name="presentableId" value="Default" />
       <updated>1730299517611</updated>
     </task>
+    <task id="LOCAL-00001" summary="intial commit">
+      <option name="closed" value="true" />
+      <created>1730313340743</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1730313340743</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="intial commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="intial commit" />
   </component>
 </project>
