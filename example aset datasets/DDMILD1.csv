@@ -1,0 +1,77 @@
+import os
+import pandas as pd
+
+def process_csv(file_path):
+    try:
+        with open(file_path, 'r', encoding='utf-8') as file:
+            lines = file.readlines()
+    except UnicodeDecodeError as e:
+        print(f"UnicodeDecodeError: {e}")
+        try:
+            with open(file_path, 'r', encoding='latin1') as file:
+                lines = file.readlines()
+        except Exception as e:
+            print(f"Failed to read the file with latin1 encoding: {e}")
+            return pd.DataFrame()
+    except Exception as e:
+        print(f"Failed to read the file: {e}")
+        return pd.DataFrame()
+
+    # Print the content of the CSV file
+    print("Content of the CSV file:")
+    for line in lines:
+        print(line.strip())
+
+    # Extract metadata
+    metadata = {}
+    i = 0
+    while lines[i].strip() != '':
+        key, value = lines[i].split(':', 1)
+        metadata[key.strip()] = value.strip()
+        i += 1
+
+    # Extract wafer data
+    wafer_data = []
+    while i < len(lines):
+        if lines[i].startswith('WAFER ID'):
+            wafer_info = {}
+            while lines[i].strip() != '':
+                key, value = lines[i].split(',', 1)
+                wafer_info[key.strip()] = value.strip().strip('"')
+                i += 1
+            i += 1  # Skip empty line
+
+            # Extract site data
+            while i < len(lines) and not lines[i].startswith('WAFER ID'):
+                if lines[i].startswith('Site #'):
+                    i += 1  # Skip header line
+                    while i < len(lines) and lines[i].strip() != '':
+                        site_data = lines[i].split(',')
+                        wafer_data.append({
+                            **metadata,
+                            **wafer_info,
+                            'Site #': site_data[0].strip(),
+                            'Thickness Data': site_data[1].strip(),
+                            'GOF Data': site_data[2].strip(),
+                            'X': site_data[3].strip(),
+                            'Y': site_data[4].strip()
+                        })
+                        i += 1
+                i += 1
+        i += 1
+
+    return pd.DataFrame(wafer_data)
+
+def process_directory(directory):
+    all_data = []
+    for filename in os.listdir(directory):
+        if filename.endswith('.csv'):
+            file_path = os.path.normpath(os.path.join(directory, filename))
+            df = process_csv(file_path)
+            all_data.append(df)
+    return pd.concat(all_data, ignore_index=True)
+
+# Set the path to the directory containing the CSV files
+directory = 'example%20aset%20datasets'
+df = process_directory(directory)
+print(df)
